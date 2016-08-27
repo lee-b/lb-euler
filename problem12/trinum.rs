@@ -1,10 +1,6 @@
 #!/usr/bin/rust run
 
-extern mod extra;
-
-use std::uint::*;
-
-fn tri(num: uint) -> uint { 
+fn tri(num: u64) -> u64 { 
 	let smaller = num - 1;
 
 	match smaller {
@@ -15,17 +11,21 @@ fn tri(num: uint) -> uint {
 
 fn test_trinum() {
 	let res = tri(7);
-	let out_str = fmt!("tri(7): %?", res);
+	let out_str = format!("tri(7): {}", res);
 
-	println(out_str)
+	println!("{}", out_str)
 }
 
-fn fac(tgt: uint) -> ~[uint] {
-	let mut res = ~[];
+fn fac<'a>(tgt: u64) -> Vec<u64> {
+	let mut res = vec!();
 
-	for range(1u, tgt+1) |i| {
-		if ((tgt % i == 0) | (i == 1)) { res.push(i); }
-	}
+	let x = tgt + 1;
+
+	for i in 1..x {
+		if (tgt % i == 0) | (i == 1) {
+			res.push(i);
+		}
+	};
 
 	res
 }
@@ -33,8 +33,8 @@ fn fac(tgt: uint) -> ~[uint] {
 fn test_fac() {
 	let res = fac(6);
 	let res_len = res.len();
-	let out_str = fmt!("fac(6, 6): %?, len: %?", res, res_len);
-	println(out_str);
+	let out_str = format!("fac(6, 6): {:?}, len: {}", res, res_len);
+	println!("{}", out_str);
 }
 
 fn main() {
